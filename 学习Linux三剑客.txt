@@ -1,0 +1,134 @@
+学习Linux三剑客之grep
+	-v 取反 
+	-i 不区分大小写
+	-m 5 前5个
+	-c 匹配了多少行
+	-B 3 前3行
+	-o 只输出匹配到的内容
+
+
+grep -f 1.txt 2.txt ： 打印出来个文件相同的行
+
+grep -v -f a b 		： 打印俩个文件不相同的行
+
+grep -e '[0-9]{2}' ： 正则匹配
+
+grep hellow config.txt ：找个文件中的字符串
+
+grep -r -n ：递归找到行数
+
+grep -m 5 -E '[0-9]{0,2}'  匹配前5行的
+
+grep 5 -c 3 前后三行 -a 是向后 -b是向前
+
+
+
+
+
+
+linux 三剑客之sed
+-n 不打印模式空军
+-e 执行脚本 表达式处理
+-f
+-i 修改原文件
+-r 正则表达式
+
+
+
+awk
+
+-f 从文件中读取awk程序源文件  awk -f test.awk
+
+-F 指定字段分隔符
+tail /etc/services |awk -F '#' '{print $1}' 
+tail /etc/services | awk -F '[ /#]+' '{print $2}'
+-v var=value 变量赋值
+
+FS 输入分隔符
+OFS 输出分隔符
+NF 一共有多少行
+NR FNR
+
+
+BEGIN{}
+END{}
+tail /etc/services | awk 'BEGIN{print "service\t\tprit\t\tdescript\n============="}{print $0}'
+tail /etc/services |awk '/tcp/{print $1}'
+
+tail /etc/services | awk '/^blp5/{print $0}'
+
+awk '/^[0-9]/{print $0}'
+
+awk '/^blp5/,/^com/{print $0}'
+
+
+awk 'BEGIN{FS=":"}{print $1"="$2}' /etc/passwd
+
+awk '{print +$0}' 将不是数字的都去掉
+
+awk '{print $0|"sort"}'
+
+awk '{print $0==2?"yes":"no"}'
+
+awk '{print n=(n?n","$0:$0)}{print n}'
+
+awk '{sum+=1}'
+
+awk '{if($1==1){print $1} else if($2==2){print $2}}'
+
+tail -n3 /etc/passwd |awk -F':' '{a[NR]=$1}END{print a[3]}'
+
+
+
+
+
+
+
+
+tail  -n3 /etc/servers |awk '{print $2}'  ：空格为划分的 第二列的数据取出来
+tail -n3 /etc/servers | awk -F '/' '{print $3}' ：以/为分隔符 
+tail /etc/servers | awk -F '[ /#]+' '{print $2}' : 使用正则 将/ # 作为分隔符 多个字符为分隔符
+a = 456 
+awk -v a= $a 'BEGIN{print a}'  使用系统变量作为awk变量d饿值
+tail /etc/servers | awk 'BEGIN{print "servers\t\tport\t\t\tDescript\n==========="}{print $0}'
+
+tail /etc/servers | awk '{print $0}END{print "===========/n"}'
+tail /etc/servers | awk '/^blp/{print $0}'   以blp开头的
+&& 和
+tail /etc/servers | awk '/^blp/ || /tcp/{print $0}'
+tail /etc/servers | awk '!/^blp/{print $0}'   以blp开头的
+awk 'BEGIN{FS=':'}{print $1=$2}' /etc/servers
+awk '{print ARGIND,$0}' A B 对比文件a b
+awk '{print +$0}' 截取到数字
+awk '{print $0|"sort"}'
+统计相同字段出现的次数
+
+awk '{a[$1]++}END{for(v in a) print v,a[v]}'
+1 123.23.43
+2 123.43.23
+3 234.23.12
+
+
+
+Linux的学习 
+cut -d '' -f fields  -d后面是分割字符  -f是要取出来的字段
+cut -c '字符范围'
+
+gerp ‘hellow’
+gerp -v 'hellow';
+
+
+sort  -k 1 以哪个区间来进行排序
+sort -r 反向排序
+sort -n 使用纯数字来排序
+sort -t 默认分隔符
+
+wc -l 列出行
+wc -w 多少字
+wc -m 多少字符
+
+uniq -i 忽略大小写
+uniq -c 进行计数
+
+
+

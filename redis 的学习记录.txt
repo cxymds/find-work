@@ -1,0 +1,66 @@
+redis 的学习记录
+首先是实用类的学习
+
+
+1 redis 的类型 字符串 列表 散列 集合 有序集合 发布和订阅
+2 字符串的命令 
+			set设置存储在给待定键中的值  set hellow world
+			get获取存储在给定键中的值	 get hellow
+			del删除存储在给定键中的值	 del hellow
+
+
+3列表中的命令（队列） 
+			rpush 给定值推入列表的右端  rpush list-key item 
+									 rpush list-key item2
+									 rpush list-key item3
+			lrange 获取列表在给定范围上的值 
+									 lrange list-key 0 -1 （0到-1可以将列表中的所有元素都取出来）
+			lindex获取列表在给定位置上的单个元素
+									 lindex list-key 1
+			lpop 从列表的左端弹出一个值
+									 lpop list-key 
+
+3集合中的命令
+			sadd 添加 sadd set-key item 
+					  sadd set-key item2
+					  sadd set-key item3
+		    smembers set-key  获取集合总的元素
+		    sismembers set-key itme检查这个是否在集合中
+		    srem set-key item 移除集合中的这个元素
+4散列中的命令（hash）
+			散列中添加
+		  	hset hash-key sub-key1 value1 
+		  	hset hash-key sub-key2 value2
+		  	hset hash-key sub-key3 value1
+
+		  	获取所有的键值
+		  	hgetall hash-key
+
+		  	删除
+		  	hdel hash-key sub-key1
+		  	获取单个
+		  	hget hash-key sub-key2
+		  	对散列存储的值执行自增操作
+		  	hincrby
+
+5 有序集合的命令
+			添加元素
+			zadd zeset-key 728 member1
+			zadd zeset-key 982 member0
+			zadd zeset-key 982 member0
+
+			 jedis.zadd("fruit", 2.0, "banana");  
+       		 jedis.zadd("fruit", 4.0, "orange");  
+        	 jedis.zadd("fruit", 8.0, "grape");  
+             jedis.zadd("fruit", 10.0, "lemon");  
+             jedis.zadd("fruit", 7.0, "cherry");  
+			获取元素并排序
+			zrange zset-key 0 -1 wiehscores
+			获取部分元素并排序
+			zrangebyscore zset-key 0 800 withscores
+			移除元素
+			zrem zset-key member1
+			获取元素
+			zrange zset-key 0 -1 withscores
+			对有序集合成员的分之进行操作
+			zincrby

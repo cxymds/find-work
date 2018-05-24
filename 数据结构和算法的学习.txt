@@ -1,0 +1,103 @@
+数据结构和算法的学习
+
+function maopao($arr){
+	$len = conunt($arr);
+	for($i=0;$i<$len;$i++){
+		for($k=0;$k<$len-1;$k++){
+			if($arr[$k] > $arr[$k+1]){
+				$tmp = $arr[$k+1];
+				$arr[$k+1]= $arr[$k];
+				$arr[$k] = $tmp;
+			}
+		}
+	}
+
+}
+
+
+function twosercha($arr,$num){
+	$low = 0;
+	$hight = count($arr)-1;
+	while($low<$hight){
+		$mid = floor(($hight+$low)/2);
+		if($arr[$mid] == $num){
+			return $num;
+		}
+		if($arr[$mid]>$num){
+			$hight = $hight-1;
+		}
+		if($arr[$mid]<$num){
+			$low = $low+1;
+		}
+
+
+	}
+}
+
+
+function quick($arr){
+	$len = count($arr);
+	$base_num = $arr[0];
+	$left = array();
+	$right = array();
+	for($i=0;$i<$len;$i++){
+		if($arr[0]<$arr[i]){
+			$left[] = $arr[i];
+		}
+		if($arr[0]>$arr[i]){
+			$right[] = $arr[i];
+		}
+	}
+}
+
+
+function xuanze($arr){
+	$len = count($arr);
+	for($i=0;$i<$len-1;$i++){
+		$p = $i;
+		for($k=$i+1;$k<$len;$k++){
+			if($arr[$p]>$arr[$k]){
+				$p = $k;
+		}
+
+		if($p!=$i){
+			$tmp = $arr[$p];
+				$arr[$p] = $arr[$l];
+				$arr[$k] = $tmp
+			}
+		}
+	}
+}
+
+猴子
+function houzi($all,$m){
+	$arr = [];
+	for($i=0;$i<count($all);$i++){
+		$arr[$i]= $i;
+	}
+	$num = 0;
+	while(count($all)>$num){
+		foreach($arr as $key => $value){
+			if($num = $m){
+				unset($arr[$key]);
+				$num = 0;
+			}else{
+				$num ++;
+			}
+		}
+	}
+	
+}
+
+
+一步一个台阶
+function taijie($num){
+	if($num == 1){
+		return 1;
+	}
+	if($num == 2){
+		return 2;
+	}else{
+		return taijie($num-1)+ taijie($num-2);
+	}
+}

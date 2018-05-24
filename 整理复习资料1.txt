@@ -1,0 +1,1037 @@
+整理复习资料 
+PHP 相关
+
+转换类型和判断类型
+$num2=(int)$num1;
+$int=intval($str);
+$flg=settype($num4,"int");  
+is_boll is_flot is_array 
+
+封装 也就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。
+多态 ：
+
+
+强制索引 select * from user force index(id) where 
+
+时间函数 strtotime date('Y-M-D H:I:S' ,$T)
+INT(10) INT(11) 只是显示的长度不同 但是在计算机中都是站4字节32位
+
+
+一、数组遍历函数
+1 list();  //不是真正的函数，而是PHP的语言结构，用于给一组变量赋值，仅能用于索引数组
+2 each();  //返回数组当前元素的键值对，并将指针移动到下一个元素位置
+3 while(); //可配合list或each使用：while(list($key, $value) = each($arr)){each $key, $value; 
+二、数组内部指针控制
+1 current();  //读取指针位置的内容
+2 key();      //读取当前指针指向内容的索引值
+3 next();     //将数组中的内部指针指向下一单元
+4 prev();     //将数组内部指针倒回一位
+5 end();      //将数组内部指针指向最后一个元素
+6 reset();    //将目前指针指向第一个索引位置
+三、数组键值操作函数
+1 array_values($arr);       //获得数组的值
+2 array_keys($arr);         //获得数组的键名
+3 array_flip($arr);         //数组中的值与键名互换（如果有重复前面的会被后面的覆盖）
+4 array_search('PHP',$arr); //检索给定的值，加true则是严格类型检查
+5 array_reverse($arr);      //将数组中的元素翻转(前后顺序)
+6 in_array("apple", $arr);  //在数组中检索apple
+7 array_key_exists("apple", $arr); // 检索给定的键名是否存在数组中
+8 array_count_values($arr);        // 统计数组中所有值出现的次数
+9 array_unique($arr);              // 删除数组中重复的值
+四、数组回调函数
+1 array_filter(); //使用回调函数过滤数组中的元素，如果回调返回true则当前的元素被包含到返回数组中
+2 array_walk();   //回调函数处理数组，自定义函数要有两个参数，本函数第三个参数可以作为回调第三个参数返回
+3 array_map();    //可以处理多个数组，每个数组的长度应该相同，传入数组的个数和回调函数参数个数应该一致
+二、数组的分段和填充
+1 array_slice($arr, 0, 3);    //将数组中的一段取出，此函数忽略键名（数组的分段）
+2 array_splice($arr, 0, 3，array("black","maroon"));    //将数组中的一段取出，返回的序列从原数组中删除
+3 array_chunk($arr, 3, TRUE);   //将一个数组分割成多个，TRUE为保留原数组的键名（分割多个数组）
+四、数组与栈，列队
+1 array_push($arr, "apple", "pear");    //将一个或多个元素压入数组栈的末尾（入栈），返回入栈元素的个数
+2 array_pop($arr);    // 将数组栈的最后一个元素弹出（出栈）
+3 array_shift($arr);   //数组中第一个元素移出并返回（长度减1，其他元素向前移动一位，数字键名改为从零计数，文字键名不变）
+4 array_unshift($arr,"a",array(1,2));  //在数组的开头插入一个或多个元素
+六、数组的排序
+1 sort($arr);      //由小到大，忽略键名
+2 rsort($arr);     //由大到小，忽略键名
+
+3 asort($arr);     //由小到大，保留键名
+4 arsort($arr);    //由大到小，保留键名
+
+5 ksort($arr);     //按照键名正序排序
+6 krsort($arr);    //按照键名逆序排序
+七、数组的计算
+1 array_sum($arr);   //对数组内部的所有元素做求和运算（数组元素的求和）
+2 array_merge($arr1, $arr2); //合并两个或多个（相同字符串键名，后面覆盖前面，相同的数字键名，后面的附加到后面）
+3  
+4 array_diff($arr1, $arr2);       //返回差集结果数组   array_diff_assoc($arr1, $arr2, $arr3);  //返回差集结果数组，键名也做比较
+5 array_intersect($arr1, $arr2);  //返回交集结果数组    array_intersect_assoc($arr1, $arr2);   //返回交集结果数组，键名也做比较 
+
+八、其他的数组函数
+1 array_unique($arr);   //移除数组中重复的值，新的数组中会保留原始的键名
+2 shuffle($arr);        // 将数组的顺序打乱
+
+11、PHP 如何获取客户端的IP地址
+$_SERVER['REMOTE_ADDR'] ;   通过全局数组来获得 
+
+
+21、MVC的优缺点
+1、 MVC的优点 
+      　　（1） 可以为一个模型在运行时同时建立和使用多个视图。变化-传播机制可以确保所有相关的视图及时得到模型数据变化，从而使所有关联的视图和控制器做到行为同步。 
+      　　（2） 视图与控制器的可接插性，允许更换视图和控制器对象，而且可以根据需求动态的打开或关闭、甚至在运行期间进行对象替换。 
+      　　（3） 模型的可移植性。因为模型是独立于视图的，所以可以把一个模型独立地移植到新的平台工作。需要做的只是在新平台上对视图和控制器进行新的修改。 
+      　　（4） 潜在的框架结构。可以基于此模型建立应用程序框架，不仅仅是用在设计界面的设计中。 
+2、 MVC的不足之处 
+      　　（1） 增加了系统结构和实现的复杂性。对于简单的界面，严格遵循MVC，使模型、视图与控制器分离，会增加结构的复杂性，并可能产生过多的更新操作，降低运行效率。 
+      　　（2） 视图与控制器间的过于紧密的连接。视图与控制器是相互分离，但确实联系紧密的部件，视图没有控制器的存在，其应用是很有限的，反之亦然，这样就妨碍了他们的独立重用。 
+      　　（3） 视图对模型数据的低效率访问。依据模型操作接口的不同，视图可能需要多次调用才能获得足够的显示数据。对未变化数据的不必要的频繁访问，也将损害操作性能。 
+      　　（4） 目前，一般高级的界面工具或构造器不支持MVC模式。改造这些工具以适应MVC需要和建立分离的部件的代价是很高的，从而造成使用MVC的困难。 
+
+ps：查看进程 
+mv：移动或者更改文件 
+find：在子目录中搜索匹配的文件 
+df：linux中df命令参数功能：检查文件系统的磁盘空间占用情况。
+cat：把一个或多个文件内容显示到标准输出 
+
+chmod：改变文件属性 
+
+chgrp：改变用户分组 
+
+grep：在文件内进行搜索 
+
+wc：命令的功能为统计指定文件中的字节数、字数、行数, 并将统计结果显示输出。
+
+
+1、Apache与Nginx的优缺点比较 
+1、nginx相对于apache的优点： 
+轻量级，比apache 占用更少的内存及资源。高度模块化的设计，编写模块相对简单 
+抗并发，nginx 处理请求是异步非阻塞，多个连接（万级别）可以对应一个进程，而apache 则是阻塞型的，是同步多进程模型，一个连接对应一个进程，在高并发下nginx 能保持低资源低消耗高性能 
+nginx处理静态文件好，Nginx 静态处理性能比 Apache 高 3倍以上 
+
+2、apache 相对于nginx 的优点： 
+apache 的rewrite 比nginx 的rewrite 强大 ，模块非常多，基本想到的都可以找到 ，比较稳定，少bug ，nginx 的bug 相对较多 
+ 
+3：原因：这得益于Nginx使用了最新的epoll（Linux 2.6内核）和kqueue（freebsd）网络I/O模型，而Apache则使用的是传统的select模型。目前Linux下能够承受高并发访问的 Squid、Memcached都采用的是epoll网络I/O模型。 处理大量的连接的读写，Apache所采用的select网络I/O模型非常低效。
+
+2、cgi 与fastcgi的区别
+cgi在2000年或更早的时候用得比较多， 以前web服务器一般只处理静态的请求，web服务器会根据这次请求的内容，然后会fork一个新进程来运行外部c程序 （或perl脚本...）， 这个进程会把处理完的数据返回给web服务器，最后web服务器把内容发送给用户，刚才fork的进程也随之退出。 如果下次用户还请求改动态脚本，那么web服务器又再次fork一个新进程，周而复始的进行。
+
+后来出现了一种更高级的方式是， web服务器可以内置perl解释器或php解释器。 也就是说这些解释器做成模块的方式，web服务器会在启动的时候就启动这些解释器。 当有新的动态请求进来时，web服务器就是自己解析这些perl或php脚本，省得重新fork一个进程，效率提高了。
+
+fastcgi的方式是，web服务器收到一个请求时，他不会重新fork一个进程（因为这个进程在web服务器启动时就开启了，而且不会退 出），web服务器直接把内容传递给这个进程（进程间通信，但fastcgi使用了别的方式，tcp方式通信），这个进程收到请求后进行处理，把结果返回 给web服务器，最后自己接着等待下一个请求的到来，而不是退出。 
+fastcgi跟cgi的区别是：
+                  在web服务器方面                                                         在对数据进行处理的进程方面
+cgi         
+fork一个新的进程进行处理                                           读取参数，处理数据，然后就结束生命期
+
+fastcgi   
+用tcp方式跟远程机子上的进程或本地进程建立连接 
+要开启tcp端口，进入循环，等待数据的到来，处理数据
+
+
+举个例子: 服务端现在有个10万个字单词， 客户每次会发来一个字符串，问以这个字符串为前缀的单词有多少个。 那么可以写一个程序，这个程序会建一棵trie树，然后每次用户请求过来时可以直接到这个trie去查找。 但是如果以cgi的方式的话，这次请求结束后这课trie也就没了，等下次再启动该进程时，又要新建一棵trie树，这样的效率就太低下了。   而用fastcgi的方式的话，这课trie树在进程启动时建立，以后就可以直接在trie树上查询指定的前缀了。
+
+在PHP中error_reporting这个函数有什么作用?
+ error_reporting() 设置 PHP 的报错级别并返回当前级别
+
+PHP 支持一个错误控制运算符：@。当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉。
+
+14：写一个函数，能够遍历一个文件夹下的所有文件和子文件夹。
+
+
+
+
+
+
+
+
+
+MVC的优缺点
+1、 MVC的优点 
+      　　（1） 可以为一个模型在运行时同时建立和使用多个视图。变化-传播机制可以确保所有相关的视图及时得到模型数据变化，从而使所有关联的视图和控制器做到行为同步。 
+      　　（2） 视图与控制器的可接插性，允许更换视图和控制器对象，而且可以根据需求动态的打开或关闭、甚至在运行期间进行对象替换。 
+      　　（3） 模型的可移植性。因为模型是独立于视图的，所以可以把一个模型独立地移植到新的平台工作。需要做的只是在新平台上对视图和控制器进行新的修改。 
+      　　（4） 潜在的框架结构。可以基于此模型建立应用程序框架，不仅仅是用在设计界面的设计中。 
+2、 MVC的不足之处 
+      　　（1） 增加了系统结构和实现的复杂性。对于简单的界面，严格遵循MVC，使模型、视图与控制器分离，会增加结构的复杂性，并可能产生过多的更新操作，降低运行效率。 
+      　　（2） 视图与控制器间的过于紧密的连接。视图与控制器是相互分离，但确实联系紧密的部件，视图没有控制器的存在，其应用是很有限的，反之亦然，这样就妨碍了他们的独立重用。 
+      　　（3） 视图对模型数据的低效率访问。依据模型操作接口的不同，视图可能需要多次调用才能获得足够的显示数据。对未变化数据的不必要的频繁访问，也将损害操作性能。 
+      　　（4） 目前，一般高级的界面工具或构造器不支持MVC模式。改造这些工具以适应MVC需要和建立分离的部件的代价是很高的，从而造成使用MVC的困难。 
+
+
+
+
+1 魔术方法 ：__set __get __construct __destruct __clone __call __autoload __tostring
+	详细解释
+	       __set  当给对象属性赋值时 及时没有这个属性 也不会报错 重载
+		   ——get  当给对象属性取值时 及时没有这个属性 也不会报错 重载
+		   ——construct 构造方法的类 每次在创建对象的时候 都会调用这个方法 给对象一些初始化的属性
+		   ——destruct 某个对象所有的引用都被删除的时候 或者显示被销毁的时候执行
+		   __call 当调用某个方法不存的时候 就调用call方法 
+		   __tostring  echo一个对象 是会报错的 但是有了tostring这个魔术方法 他可以让echo出来对象
+		   ——sleep  序列化函数的时候使用 相当于一个回调函数 在序列化函数的时候 先看有没有__sleep有的话先执行 再序列化 增加一些东西
+		   __wakeup  反序列化函数的时候使用
+
+
+
+2 基础函数 ： strlen mb_strlen 获取字符串长度
+			 mb_substr 中文截取无乱码
+			 split 正则表达式将字符串分割到数组中
+			 sort ： 对数组进行排序 不保持索引关系
+			 ksort ： 对数组的键进行排序 
+			 rsort ： 对数组进行正想排序 不保持索引关系
+			 arsort :对数组进行逆向排序并保持索引关系
+			 array_unshift：数组开头添加一个值
+			 array_push：数组后添加一个值
+			 array
+			 count
+			 list
+			 explode
+			 array_keys
+			 array_values
+			 array_column
+			 array_sum
+			 array_merage()
+			 trim();
+			 str_replace()
+			 implode
+			 str_repeat
+			 strrev
+			 addslashes:转义字符串
+			 chunk_split($str,2,',')
+			 array_count_values
+			 htmlspecialchars 实体html
+	常考数组函数 ：数组 +链接数组与array_merge()的区别
+				 array_chunk
+				 url加密： urlencode urldecode
+				 fopen 文件锁
+
+
+3 include 和 require 的区别 
+4 get 和 post 提交方法的区别 ： 
+			 1 get 是通过url传参 参数在url中可以看到  post是通过htpp post机制 通过html header内传参 用户不可见
+			 2 get方式传送的数据量比较小 post方式数据量大 并且相对于get来说更加的安全
+			 3 服务器接收get 是通过request.querystring 接收数据 post 是通过request.form接收数据
+			 4 get一般是获取服务器资源 post是发送数据 更改一些内容
+
+5 单引号 双引号 没啥意思
+
+6 PHP 中使用全局变量 global $a $Global['a']
+7 全局环境变量
+			1 $_SERVER
+			2 $_REQUEST
+			3 $FILES
+			4 $COOKIE
+			5 $SESSION
+			6 $GET
+			7 $POST
+			8 $GLOBALS
+8 3种PHP 循环的语法
+	foreach() for() each list while
+
+
+
+9 接口和抽象类的区别
+	1 抽象类是一种不能被实例化的类 只能作为其他类的父类使用 用abstract来声明 他与普通类相似 都有成员变量和方法 但是抽象类中至少要有一个抽象方法 并且这个方法没有方法体 是用来被子类重写的
+	2 接口用interface来定义 可以多继承 接口中的方法也没有方法体 也是用来被子类实现的
+
+	详细解释
+	继承和多态  抽象类 接口
+	继承和多态 都是对类进行了复用  一个是类级别的复用 一个是方法级别的复用
+
+	继承 ：      1 子类继承了父类的方法和属性 同时子类也可以有自己的方法和属性
+	       		2 在继承中用parent 指代父类 
+	继承的缺点：  1 破坏封装性 比如定义鸟类为父类 有羽毛和飞翔 子类鸭子 没有飞翔却可以使用
+		   		2 继承是紧耦合
+		        3 继承扩展复杂
+		        4 PHP在5.4 引用了tratis的语法结构 
+
+         多态 ： 多态的本质是if else  
+		        同一个类的对象收到相同消息的时候 会得到不同的结果
+
+         接口 ：接口定义了一组规范 所有实现接口的类 必须要实现接口里的方法 否则报fetal错误
+
+
+2.子类重写父类的 protected 方法有什么限制？或者说有什么要遵守的规则？
+    重写方法不能比被重写方法限制有更严格的访问级别。
+PHP文件结尾不以?>结束原因
+	如果使用闭合标签，任何由开发者，用户，或者FTP应用程序插入闭合标签后面的空格都有可能会引起多余的输出、php错误、之后的输出无法显示、空白页。因此，所有的php文件应该省略这个php闭合标签，并插入一段注释来标明这是文件的底部并定位这个文件在这个应用的相对路径。这样有利于你确定这个文件已经结束而不是被删节的。
+
+
+10 autoload 是如何运作的
+	这个魔术方法的基本条件是 类文件名和类名相同 当程序实例化某个类的时候 如果在实例化前没有引入这个类文件 那就通过autoload 这个函数 拼接路径 找到文件 通过require 或者 include 来引入这个文件
+11  	sort是按值排序 不保持索引关系 
+		rsort根据值倒叙排序 不保持索引关系 
+		asort保持索引关系 
+		ksort是用键排序 
+12 public 公共的 private 本类中使用 protected本类和子类中使用
+13 安全性 防止sql注入 addslashes 防止脚本注入 htmlspecialchar
+14 传输方式有哪些： get post put delete 
+15 php会回收机制详细：使用了计数器的方式 每次有一个对象 就+1 当为0 或者null 的时候 就销毁
+16 session是怎么存储的 禁掉cookie怎么用 这个基本不用说了
+17 curl分几步抓取网页 1 curl_int 初始化 
+				    2 一些参数配置 是否直接返回结果 需不需要请求头 
+				    3 获取内容  Curl_exect（）
+				    4 释放	
+				   具体事例
+				    $curl=curl_init();  
+					$url="./register.php";  
+					curl_setopt($curl, CURLOPT_URL,$url);  
+					curl_setopt($curl, CURLOPT_POST, true);  //设置请求为post  
+					$post_data=array('username'=>"嘿嘿",'password'=>'111111','confirm'=>'111111',  'email'=>"986992484@qq.com");   //要发送的数据组装成一个数组  
+					curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);  //post的数据内容  
+					curl_exec($curl);   
+					curl_close($curl);  
+18 框架核心你理解的
+MVC思想 smart模板实现html和PHP 代码分离 通过autoload动态加载文件 
+
+19 PHP中的错误级别 
+		1 deprecated 不推荐 不建议
+		2 notice
+		3 warning 
+		4 fetal error 致命
+		5 prase error 语法解析
+
+20  面向对象设计的五大原则
+		1 单一职责原则
+		2 接口隔离原则
+		3 开放封闭原则
+		4 替换原则
+		5 依赖倒置原则
+21 socket 
+		1 socket通常被称为套接字 用于描述ip地址和端口 是一个通信连的句柄。
+			我理解的是一种通信机制，当开启服务后会在计算机注册网络服务，每当进入一个客户端
+			那么就分配给客户端一个端口，我们的服务端的端口为80 那就是跟80通信。
+		2 创建socket 然后绑定socket到指定的地址和端口 开始监听 接收到请求后 吊起另外一个socket开始进行处理客户端的请求 读取客户端的输入 返回给服务端
+
+22 Nginx如何与PHP通信（socket／tcp），还有其他的方式么
+1 unix socket  方式要求 nginx 和 php-cgi 必须在同一台机器上
+2 unix socket 就是buffer与bufer之间数据交换
+
+
+数据库相关
+
+基础复习
+	MYSQL基础复习
+1 关于锁 
+ 	1 表锁是最基本的锁策略 他的开销是最小的
+ 	2 行锁最大程度的支持并发处理 但是开销就比较大了
+ 	3 锁都是在同一时刻被释放的
+ 	总结下 每种锁都有自己的用处 
+2 事务 
+	1 原子性 隔离性 一致性 持久性 
+	2 事务的4个隔离级别 1 未提交读 2 提交读 3可重复读 4 可串行化
+	3 不能在同一事务中使用多种混合引擎 平时没问题 但是一旦事务回滚 那么myisam 这个表就会出现问题
+3 InnoDB 引擎
+	非叶节点存储的是子树里最小的关键字。同时数据节点只存在于叶子节点中
+	1 数据存储位置 ： 是将每个表的数据和索引放在单独的文件中 在一个由InnoDB来放入的一个表空间 一系列的数据文件 在mysql4.1 以后 
+	2 默认隔离级别是 ： 可重复读 
+	3 支持事务和行级锁
+	3 InnoDB的表是由聚促索引建立的 聚促索引的二级索引必须包括主键列 所有如果主键列很大 其他的索引都会很大
+		所以表如果索引多的话 主键应该尽可能的小
+	4 B+Tree的数据结构。
+4 MyISAM 引擎
+	1 提供了全文索引 压缩 空间函数
+	2 不支持事务和行级锁
+	3 支持表压缩 如果说数据插入后不在变化 那么可以压缩表 这样实际上比innodb更加节约空间 
+	4 数据文件和索引文件分开存储
+5 其他引擎
+	1 csv引擎 读取csv格式文件作为普通来处理 主要是数据交换
+	2 memroy 查找速度很快 
+6 数据类型的优化
+	1 尽量使用正确存储数据的最小类型，他们占用更小的磁盘 内存 CPU 需要处理的CPU周期也更小
+	2 选择简单的数据类型
+	3 尽量避免使用NULL 占用更多的存储空间 并且mysql需要特殊处理
+
+	一些必要记得的 注意： 时间类型 ：date  time datetime timestamp timestamp占用储存空间小 并且根据时间变化	
+					   整数类型：tinyint samllint mediumint int bigint 8 16 24 32 64 位存储空间
+					   			存储值范围是-2(n-1) 到2（n-1）-1
+					   			tinyint 存储范围 0-255 或者是-128 到正127
+
+					   实数类型： 
+					   			带有小数点的数字 
+					   				decimal : 允许最多65个数字
+					   				float	: 占用4个字节
+					   				double	: 占用8个字节存储
+					   	字符串类型：
+					   			char: 定长
+					   			varchar:变长 innodb 会把过长的varchar储存为blob 
+					   			blob: 该类型存储的是二进制数据 没有排序规则和字符集
+					   			text:  存储的有字符集和排序规则
+
+					   	枚举：
+					   			enum 男 女 1 2 这种
+
+
+7 索引类型
+	1 B-Tree索引 ： 及每一个叶子节点都包含指向下一个叶子节点的指针。
+	2 哈希索引 ：1 哈希索引的数据结构是的哈希值和行数都存在文件中 第几行 他的哈希值是多少 所以他不支持不等于 大于小于模糊查询等
+				2 但是在innodb中支持伪哈希 在b-tree索引上再自适应哈希 使用的时候在and where CRC32哈希 值查找
+	3 空间数据索引（R-tree）:myisam表支持空间数据索引 
+	4 全文索引 ：查找的是文本找中的关键词
+	5 聚簇索引： 叶子页包含行的全部数据 节点页包含的只是索引列
+
+
+
+重点: explan type all说明是没有用索引 row 看他影响的行数 如果太大就是慢的 key 看他用的哪个索引 
+1 项目中优化sql语句的办法
+	1 尽量不查询* 
+	2 不在索引上计算 使用not in <>
+	3 只要一条数据使用Limit1 
+	4 explan 语句
+	5 能用联合查询 就尽量不要使用子查询
+2 数据库优化
+ 	1 建表的时候 要符合数据库的范式 不要有多余的融于字段 能主键代替的我们都用主键 并且建表在经常用的字段上加上索引或者联合索引 字段的类型用使用正确 尽量使用not null 
+	2 写sql语句的时候优化我们的语句 where条件里要用索引去查询 不要对索引字段进行not in或加减计算 尽量不要用子查询 查询完以后用explan看一下是否使用我们正确的索引 如果没有的话可以考虑使用强制索引 fors index
+	3 如果数据量很大 可以用分库分表这些 id hash 得根据我们需求进行表分库 对数据敏感度不高的 主从分离 
+3 数据库中的事务是什么
+	事务是一组有序的数据库操作。原子性 隔离性 一致性 持久性
+4 innodb 与 myisaim的区别
+	1 innodb 支持行锁 支持外键 
+
+
+
+
+
+5 索引有哪些 ： 联合索引 普通索引 唯一索引 主键索引 
+ALTER TABLE `table_name` ADD UNIQUE (`column`)
+6 唯一索引和主键索引的区别 ： 1 主键索引只能有一列 唯一索引可以有多个 2 主键索引不可以有空值  唯一索引是可以有空值的 3 主键索引是一种约束 唯一索引是一种索引 本质上是不同的 一种创建了索引的文件 一种是没有的
+7 mysql事务的性质 ： 原子性 一致性 持久性 隔离性
+8 mysql事务的隔离级别： 未提交读 提交读 重复读（默认）可串行化
+隔离级别 
+	未提交读 我没好提交我改的操作 其他人去读取数据操作 就是脏读了我改变到一半的数据 我提交失败了 他读取的数据不对 
+	提交读 
+    可重复读 我现在正操事务 我读取了一个数据 其他人也要这个数据库 他读取不是我改变 是跟我读取一样数据  可串行化 锁住了 我操作你不能操作 这个不好 并发怎么处理 太慢了 容易死锁
+
+
+9 联合索引 查找原则（最左侧原则）对索引进行计算 group等都会使索引失效
+（a,b,c)使用索引的情况
+where a=1 and b=2 and c=3  使用
+
+where a>1 and b=2 and c=3   使用
+where b>1 and a=2 and c=3   使用
+
+where a>1 and b=2     使用
+
+where a>1  and c=3   使用
+
+where  b=2 and c=3  不使用
+where  b=2 and c=3 order by a  使用
+
+10 模糊查询会用联合索引吗
+后通配 走索引 前通配 走全表
+11 经典查询语句
+select name,sum(score<60) as gk,avg(score) as pj from stu group by name having gk>=2;
+
+select count(id) as total from orders group by product_id having total > 1000 order by tatal desc;
+select sum（price） as total from orders group by user_id order by price desc limit 10;
+
+排重 排重 统计count( distinct  uid)
+
+
+12 常见的数据库架构为主从，如何在强一致性的场景下保障数据的一致性
+      第一种解决办法：可以先写主库 然后等待同步到从库后 读取
+      第二种解决办法： 数据库中间件
+      第三种解决办法： 通过缓存处理
+      第四种解决办法： 就是强制读主 
+
+13 说一下Inodb的磁盘文件结构
+
+14 索引B+tree的数据结构
+
+15 如何建索引，说一说具体的SQL语句
+
+	create index index_name on table_name
+
+16  Innodb的索引结构（画图说明）
+
+
+17 B+ tree在索引 where id = 100 的索引过程
+
+
+  为SQL建立索引 where a = 1 and b > 10 and c =1
+
+18 Redis 集群配置你觉得难点在那，
+
+19  MySQL，Redis，。。这些服务主服务器挂掉，从的为什么会顶上去，怎么回事
+
+
+
+网络相关 
+1 输入 www.baidu.com :    1 首先客户端发起请求到dns域名解析 找到相应的服务器 返回给客户端
+					     2  客户端通过ip找到服务器 与其建立tcp连接 并发起http请求
+					     3  服务器接收到请求 根据请求给客户端返回数据包
+					     4 客户端接收到请求后 解析数据包 渲染给页面
+
+2 三次握手 4次挥手（属于那一层）
+第一次握手 客户端向服务器发起请求 发送SYN包 等待服务器确认
+第二次握手 服务器收到SYN包以后 知道了客户端的请求 再将数据包发送给客户端确认请求 并等待
+第三次握手 客户端收到数据包 检验 成功后与服务器建立连接 
+4次挥手
+第一次挥手  客户端向服务器发送FIN 用来关闭与服务器的链接 并等待
+第二次挥手  服务器收到FIN 并发送一个ACK 并等待
+第三次挥手  服务端再次发送一个FIN 用来关闭服务器与客户端的请求
+第四次挥手  客户端收到后马上等待关闭 并发送一个ACK 给服务器 服务器收到后关闭
+
+3 网络七层协议具体
+应用层 其实就是类似APP应用
+表示层 数据的加密 数据的格式 
+会话层 数据交流
+传输层 数据的传递 协议
+网络层 需要网络
+数据链云层 数据的传递 数据线 
+物理层 处理这些数据
+
+	tcp/ip四层
+	应用层
+	传输层
+	网络层
+	数据链云层
+
+http 头 
+分为2个部分 
+请求报文 
+	请求行：请求行由方法字段、URL 字段 和HTTP 协议版本字段 3 个部分组成，他们之间使用空格隔开
+
+	请求头：User-Agent：产生请求的浏览器类型;
+		   Accept：客户端可识别的响应内容类型列表;星号 “ * ” 用于按范围将类型分组，用 “ */* ” 指示可接受全部类型，用“ type/* ”指示可接受 type 类型的所有子类型;
+		   Accept-Language：客户端可接受的自然语言;
+		   Accept-Encoding：客户端可接受的编码压缩格式;
+		   Accept-Charset：可接受的应答的字符集;
+		   Host：请求的主机名，允许多个域名同处一个IP 地址，即虚拟主机;
+		   connection：连接方式(close 或 keepalive);
+		   Cookie：存储于客户端扩展字段，向同一域名的服务端发送属于该域的cookie;
+		   空行：最后一个请求头之后是一个空行，发送回车符和换行符，通知服务器以下不再有请求头;
+	请求正文：请求包体不在 GET 方法中使用，而是在POST 方法中使用。POST 方法适用于需要客户填写表单的场合。与请求包体相关的最常使用的是包体类型 Content-Type 和包体长度 Content-Length;
+响应报文
+
+	状态行：状态行由 HTTP 协议版本字段、状态码和状态码的描述文本 3 个部分组成，他们之间使用空格隔开;
+
+	响应头部
+		Location：Location响应报头域用于重定向接受者到一个新的位置。例如：客户端所请求的页面已不存在原先的位置，为了让客户端重定向到这个页面新的位置，服务器端可以发回Location响应报头后使用重定向语句，让客户端去访问新的域名所对应的服务器上的资源;
+
+		Vary：指示不可缓存的请求头列表;
+
+		Connection：连接方式;
+
+
+	空行：最后一个响应头部之后是一个空行，发送回车符和换行符，通知服务器以下不再有响应头部
+
+
+	响应正文：响应包体：服务器返回给客户端的文本信息;
+
+4 状态码 200     成功
+		301     永久移动 请求的网页移动到其他位置
+		302     临时移动 
+		400 	服务器不理解的语法错误
+		401 	还没有授权
+		403 	禁止
+		404 	没找到
+		500 	服务器错误
+		502 	错误网关
+		503 	服务不可用 临时的
+		以及解决办法
+
+5 一个网页打开很慢怎么排查问题
+6 线上出现问题怎么排查
+7 nginx与PHP进行交互详解
+Nginx本身不会对PHP进行解析，终端对PHP页面的请求将会被Nginx交给FastCGI进程监听的IP地址及端口，由php-fpm作为动态解析服务器处理，最后将处理结果再返回给nginx
+
+
+
+
+算法
+
+冒泡 
+function getPao($arr){
+	$len = count($arr);
+	for($i=0;$i<$len;$i++){
+		for($k=0;$k<$len-$i;$k++){
+			if($arr[$k] > $arr[$k+1]){
+				$tmp = $arr[$k+1];
+				$arr[$k+1] = $arr[$k];
+				$arr[$k] = $tmp;
+			}
+		}
+	}
+	return $arr;
+}
+
+快排
+function quick_sort($arr){
+	$len = count($len);
+	$left = array();
+	$right = array();
+	$base_num = $arr[0];
+	for($i=0;$i<$len;$i++){
+		if($base_num > $arr[$i]){
+			$left[] = $arr[$i];
+		}else{
+			$right[] = $arr[$i];
+		}
+	}
+}
+
+选择排序
+function choose($arr){
+	$len = count($arr);
+	for($i=0;$i<$len-1;$i++){
+		$p=$i;
+		for($j=$i+1;$j<$len;$j++){
+			if($arr[$p]>$arr[$j]){
+				$p=$j
+			}
+		}
+		if($p != $i){
+			$tmp = $arr[$p];
+			$arr[$p] = $arr[$i];
+			$arr[$i] = $tmp;
+		}
+	}
+	
+}
+
+二分查找
+function twosearch($arr,$str){
+	$low = 0;
+	$hight = count($arr)-1;
+	while($low<$hight){
+		$mid = floor(($low+$hight)/2);
+		if($arr[$mid] == $str){
+			return $arr[$mid];
+		}
+		if($arr[$mid]>$str){
+			$hight = $hight-1;
+		}
+		if($arr[$mid]<$str){
+			$low = $low +1;
+		}
+	}
+}
+
+两个有序数组合并 （重点是有序）
+合并俩个有序数组
+$arr1 = array(1,2,3,4,5,6,7,8);
+$arr2 = array(3,4,5,7,9,10);
+//方法1
+function mergeOrderly1($arr1,$arr2){
+ $i=0;$j=0;
+ $int = array();
+ while($i<count($arr1) && $j<count($arr2)){
+  $int[] = $arr1[$i]<$arr2[$j]?$arr1[$i++]:$arr2[$j++];
+ }
+ while($i<count($arr1)){
+  $int[] = $arr1[$i++];
+ }
+ while($j<count($arr2)){
+  $int[] = $arr2[$j++];
+ }
+ //$int = array_merge($int,array_slice($arr1,$i));
+ //$int = array_merge($int,array_slice($arr2,$j));
+ return $int;
+}
+
+
+
+缓存
+memcache 内部储存机制
+1 memcache和redis的内部实现方式
+
+
+2  redis数据一致性的底层原理
+
+3  redis 主从同步方式
+
+4 怎么使用异步队列
+
+5 设计秒杀
+
+6 项目怎么设计缓存的
+
+7 超过内存怎么办
+
+
+8 aof有什么缺点 重启的时候系统会很慢因为要执行redis命令
+
+页面静态化实现 ：  ob_start  打开缓存区域 
+				ob_getcontents 然后将我们的需要静态化的数据放入缓存区
+				Ob_clean 清楚缓存区域
+				ob_get_clean 得到当前缓存区域的内容 并擦除当前的缓冲区	
+
+
+各大公司经常问到的redis -- 无敌redis 
+Redis：
+      1 数据结构有几种类型 ：
+      			 列表 散列 有序集合 集合 字符串
+      2 在什么样的场景下用到什么类型
+
+      3 “雪崩效应” 产生原因和解决方案
+      			redis 有缓存时间 当在缓存失效的时间 发生高并发的情况下 所有的数据都冲向数据库取数据 发生了缓存穿透  造成了血崩 加悲观锁 设置不同的缓存时间节点 提前预防 刷新缓存
+      4 当redis做缓存时，如何确定缓存更新策略（当DB数据更新时）
+      			1 首先看我们是以何种为主 以redis为主 那么直接写进redis里 然后再写进mysql
+      			2 对数据要求不是很及时的 可以先写进数据库 然后再等过期时间后给redis
+      			3 还有就是写进数据库的同时 使相对应的redis失效
+
+
+     5  一致性哈希的含义和应用场景及缺点
+      解决了雪崩问题 首先 首尾呼应的环形哈希 
+
+
+      6 当redis做db时如何保证数据落地（redis突然挂了）
+
+
+      7 redis 的过期失效是怎么失效的，怎么释放内存的
+
+
+
+
+
+
+linux 
+	linux 的基本命令
+1 linux文件属性
+		 可读可写可执行 421 文件所有者的权限 文件所属用户组权限 其他人对此文件的权限
+		 d 是目录
+		 - 是文件
+		 l 是链接文件
+		 b 接口设备
+		 c 串行端口设备 
+   改变文件的属性和权限 
+   		chown 改变文件所有者
+   		chgrp 改变文件所属用户组
+   		chmod 改变文件的权限
+
+2 一些命令
+操作文件 目录 创建 删除 类
+	cp  scp 源文件 目标文件
+	mkdir 新建目录
+	rmdir 删除目录
+	touch 创建文件
+	ls 查看文件
+	mv 移动文件
+	rm 移除文件或目录
+	chattr +i 不让删除
+
+查看文件类
+	cat 由第一行开始显示
+	tac 有最后一行显示
+	nl 显示的时候 显示行号
+	more 一页一页的显示
+	less
+	head 只看开头几行
+	tail 只看结尾几行
+	od 二进制看文件
+
+查找类
+	whereis 后面加ifconfig 文件名等等
+	find / -mtime 0 
+	find /vagrant -name pass 文件名字为pass 的文件
+	find /vagrant -type a 文件类型
+压缩类
+	tar -jcv -f a.txt
+	tar -jxv -f a.txt
+
+计算机状态类
+
+
+	df 文件系统整体磁盘使用量
+	du 评估文件系统的磁盘使用量
+	top 可以实时动态地查看系统的整体运行情况
+	ps 
+
+
+
+awk类
+cat mail-2013-10-28.log | awk -F ',' '{print $8}' | sort | uniq -c | sort -k1nr | head -10
+统计nginx日志ip访问次数
+awk '{a[$1]++}END{for(v in a)print v,a[v]}' access.log
+统计访问访问大于 100 次的 IP：
+awk '{a[$1]++}END{for(v in a){if(a[v]>100) print v,a[v]}}'
+统计访问 IP 次数并排序取前 10
+awk '{a[$1]++}END{for(v in a )print v,a[v] | "sort -k1 -nr |head -10"}'
+文件a 文件B相同记录
+awk 'FNR=NR{a[$0]}NR>FNR{if($0 in a) print $0}'
+找出 b 文件在 a 文件不同记录：
+awk 'FNR=NR{a[$0]}NR>FNR{!($0 in a)print $0}'
+将 a 文件合并到 b 文件：
+awk 'FNR=NR{a[$1]=$0}NR>FNR{print a[$1],$2}'
+将 a 文件相同 IP 的服务名合并：
+awk 'BEGIN{FS=":";OFS=":"}{a[$1]=a[$1] $2}END{for(v in a)print v,a[v]}' a
+统计字符串中每个字母出现的次数：
+awk -F '[.,]' '{for(i=1;i<=NF;i++) a[$i]++}END{for(v in a)print v,a[v]}'
+统计平均成绩
+awk '{a[$1]+=$2;b[$1]++}END{for(i in a)print i,a[i]/b[i]}' file
+统计hello出现次数
+echo "hello" |awk -F '' '{for(i=1;i<=NF;i++)print $i}'
+awk '{name[$1]++;cost[$1]+=$2;number[$1]+=$3}END{for(v in name)printv,cost[v],number[v]}' file
+Linux 某文章有三列，取出第二列的和
+awk '{a[$2]+=$2}END{for(v in a)print v,a[v]}'
+
+
+单例模式
+class a (){
+	public $ins;
+	static private $hash;
+	private function __construct(){
+
+	}
+	static  function get(){
+		if(self::$hash !== null){
+			self::$hash = new self();
+		}
+	}
+	return $hash;
+	private __clone(){
+
+	}
+}
+
+观察者模式
+主题接口
+interface subject(){
+	public function register(observer $observe);
+	public function noticy();
+}
+观察者接口
+interface observer(){
+	public function watch();
+}
+
+主题
+class action implements subject(){
+	public function $_observe = array();
+	public function register(observe $observer){
+		$this->_observe[] = $observe;
+	}
+	public function noticy(){
+		foreach($this->_observe as $observe){
+			$observe->watch();
+		}
+	}
+}
+观察者
+class a implements observer(){
+	public function watch(){
+		echo '111';
+	}
+}
+
+
+function mergeOrderly2($arr1,$arr2){
+    $arr = array();//定义最终数组容器
+    $arr2Num = count($arr2);//统计数组长度
+    $arr1Num = count($arr1);
+    $i1 = 0;//数组1 的循环标记
+    $i2 = 0;//数组2 的循环标记
+    while($i1 < $arr1Num || $i2 < $arr2Num){//是否还需要合并
+        if($i1 < $arr1Num && $i2 < $arr2Num){//当两个数组都没有到达末尾，情况一
+            if($arr1[$i1] > $arr2[$i2]){//需要比较数组1和数组2，小的放入目标数组，并且标记+1
+                $arr[] = $arr2[$i2];
+                $i2++;
+            }else{
+                $arr[] = $arr1[$i1];
+                $i1++;
+            }
+        }elseif($i1 < $arr1Num && $i2 >= $arr2Num){//数组2 已经到达末尾，而数组1还为到达，情况二
+            $arr[] = $arr1[$i1];//直接把数组1的内容插入到目标数组中
+            $i1++;
+        }elseif($i2 < $arr2Num && $i1 >= $arr1Num){//数组1已经到达末尾，而数组2还未到达，情况三
+            $arr[] = $arr2[$i2];//直接把数组2的内容插入到目标数组中
+            $i2++;
+        }
+    }
+    return $arr;
+}
+
+<?php
+ /*
+ 写出一个能创建多级目录的PHP函数
+ */
+ function createdirlist($path,$mode){
+   if (is_dir($path)){
+   //判断目录存在否，存在不创建
+     echo "目录'" . $path . "'已经存在";
+  //已经存在则输入路径
+   }else{ //不存在则创建目录
+      $re=mkdir($path,$mode,true);
+  //第三个参数为true即可以创建多极目录
+     if ($re){
+       echo "目录创建成功";//目录创建成功
+     }else{
+       echo "目录创建失败";
+      }
+     }
+  }
+$path="/a/x/cc/cd"; //要创建的目录
+$mode=0755; //创建目录的模式，即权限.
+createdirlist($path,$mode);//测试
+
+function fuhuan($all,$m){
+	$arr = [];
+	for($i=0;$i<$all;$i++){
+		$arr[$i] = $i;
+	}
+
+	$nums = 1;
+	while(count($arr)>1){
+		foreach($arr as $key => $value){
+			if($nums == $m){
+				unset($arr[$key])
+				$nums = 1;
+			}else{
+				$nums ++;
+			}
+		}
+	}
+	$new_arr = array_values($arr);
+}
+
+
+	一步一个台阶
+
+    function cls($num){
+    	if($num == 1){
+    		return 1;
+    	}elseif{$num == 2}{
+    		return 2;
+    	}else{
+    		return cls($num-1)+cls($num-2);
+    	}
+
+    }
+
+
+ CREATE TABLE `send_phone` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `phone` varchar(11) DEFAULT '' COMMENT '手机号',
+  `ip` varchar(100) DEFAULT '' COMMENT '发送短信ip地址',
+  `agent` text COMMENT '浏览器版本',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+面向对象和面向过程
+面向对象有三大特性  封装继承和多态 面向过程实际是把我们要做的事情按照顺序从上之下一点点的完成 想用什么就直接调用所需的函数 但是面向对象是把我们要做的事情按照类别 分成一个个抽象的对象 用哪个我们先找到对象 哪个 去调用里面的方法 面向对象比较麻烦 但是对于我们开发来说模块性更高
+
+nginx实际上是一个高性能的http和反向代理服务器 他与apache比占有的内存少 稳定拥有并发能力
+他可以做正向代理服务器  反向代理服务器 负载均衡 负载均衡有iphash 轮询 权重 fair按照响应时间来分配
+url_hash
+
+nginx的配置 
+main模块 nginx全局信息配置 ： 
+		   user 用来指定nginx worker进程运行用户以及用户组 默认noboday
+		   worder_processes指定nginx开启子进程
+		   error_log 错误日志文件位置和输出级别
+		   worker_rlimit_nofile 一个进程最多打开文件数量的1024
+
+event nginx工作模式配置
+	  worker_connections 最大同事接收链接数量 1024 和worker_processer共同决定
+	  multi_accept  在接收到一个新链接后尽可能多的接收 on
+	  use epoll 指定线程轮询方法
+
+httpt模块 http协议信息的一些配置 默认配置
+
+
+server模块  虚拟主机配置
+	listen  端口
+	server_name 指定ip或者域名
+	root server虚拟主机的根目录
+	index 用户访问web网站时的全局首页
+	charset 编码格式
+	access_log 访问记录日志
+	error_log 错误日志
+   location /匹配访问根目录
+	root 访问虚拟主机的web目录
+	index 访问不存在资源时展示的资源列表
+
+upstream 模块 
+	指定负载均衡的配置 调度算法 weight 权重 轮询 hash fair
+	server host 服务器列表
+	down 是否暂停
+	max_fails 最大失败次数
+	fail_timeout 请求失败后多久请求时间
+
+
+
+	yii  tp 比较
+	1 Yii支持PHP的命名空间和自定义autoload方法。
+	2 Yii的组件思路是非常不错的，用起来十分地舒服
+	  Yii的延迟加 载也做得比较彻底，每个组件都是用到的时候才加载。
+	  TP中，如果配置了session自动打开，则TP在应用初始化的时候执行 session_start()。而Yii则是你用到session的时候才打开session。
+	3 Yii封装了大量的页面控件和类库
+
+1. memcached 单个key 老版本是1M，新版本是2M。我们可以通过memcache.h 文
+件去修改他的单个KEY 的大小。
+2. redis 单个key 大小为512M
+3. memcached 是一个多线程的缓存服务器，而redis 是一个单线程的服务器
+4. memcached 数据不能持久化，断电后数据丢失
+5. redis 是可以进行持久化的。可以使用RDB 机制和AOF 机制进行数据持久化
+6. memcached 不支持集群，它的多服务器情况是在addServer 的时候，由客户端使用
+hash 的方式，分配至指定的服务器上的。
+7. redis 支持集群，并且redis 有最多16 个库。memcached 没有库的概念
+8. redis 支持更多的数据类型，而memcached 只有键值对，我们需要自行处理值。
+9. redis 在使用的时候，还能单作队列服务器使用，还支持消息订阅（聊天室，消息
+推送）。
+10. redis 内部实现的数据结构是字典。
+
+
+
+
+strlen 获取字符串长度
+substr($a,2,4)
+chunk_split($str,3,',');
+strrev
+定义常量 define
+array_map('ucfirst',$arr);
+array_slice($v,1);
+array_reverse() = rsort
+sub_count($arr,'g');出现次数
+array_unshift($arr,’jack’); 添加到开头
+
+
+memcached 
+add ($key, $val, $exp = 0)
+get 
+delete
+replace
+
+php 请求如何被执行的
+1 客户端发起请求
+2 服务端接收到请求 判断是否是php请求 然后发起一个socket请求给phpcgi  phpcgi在内存中选择一个cgi解释器处理 php fpm 把数据返回给webserver
+3 webserver将其返回给客服端
+
+写出smarty 模板的特点（新浪网技术部）
+速度快，编译型，缓存技术，插件机制，强大的表现逻辑, 但smarty3.0 速度较慢，但是从
+总体上面来说现在用的企业越来越少了，追求高效的企业，建议使用<?= 原生PHP 的模版
+替换机制。
+
+
+
+setcookie(‘username’,’jack’,time()+7*24*3600);
+你会用哪个函数设置当前内容的Content-Type? （卓望）
+header 函数
+
+
+POST www.10086.cn HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Referer: http://localhost/a.html
+Accept-Language: zh-CN
+User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0;
+KB974487)    
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: localhost
+Content-Length: 25
+Connection: Keep-Alive
+username=abc&password=123
+
+
+nginx 和 PHP 交互
+
+    Nginx本身不会对PHP进行解析，终端对PHP页面的请求将会被Nginx交给FastCGI进程监听的IP地址及端口，由php-fpm作为动态解析服务器处理，最后将处理结果再返回给nginx。其实，Nginx就是一个反向代理服务器。Nginx通过反向代理功能将动态请求转向后端php-fpm，从而实现对PHP的解析支持，这就是Nginx实现PHP动态解析的原理。
+
+
+
+
+
+
